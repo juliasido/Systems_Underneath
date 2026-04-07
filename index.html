@@ -291,6 +291,22 @@ strong{color:var(--charcoal);font-weight:600}
   margin:24px 0 8px;
 }
 .img-pair-item{}
+.img-pair-item img{
+  width:100%;
+  display:block;
+  border-radius:6px;
+  border:1px solid var(--rule);
+  margin-bottom:8px;
+}
+.img-full{
+  margin:24px 0 8px;
+}
+.img-full img{
+  width:100%;
+  display:block;
+  border-radius:6px;
+  border:1px solid var(--rule);
+}
 .img-pair-placeholder{
   font-family:'DM Sans',sans-serif;
   background:#f0ede8;
@@ -459,11 +475,11 @@ footer{
 
     <div class="img-pair">
       <div class="img-pair-item">
-        <div class="img-pair-placeholder">spire-component-library-system.png</div>
+        <img src="spire-component-library-system.png" alt="Spire component library showing color tokens, component sets, and light/dark inventory" />
         <p class="img-pair-caption"><strong>Component library.</strong> Color system, component sets, and light/dark inventory.</p>
       </div>
       <div class="img-pair-item">
-        <div class="img-pair-placeholder">spire-figma-readme-components.png</div>
+        <img src="spire-figma-readme-components.png" alt="iOS and Android component differences documented side by side" />
         <p class="img-pair-caption"><strong>Platform-native equivalents.</strong> iOS vs Android documented side by side: navigation, inputs, bottom sheets.</p>
       </div>
     </div>
@@ -488,7 +504,7 @@ footer{
 
     <p>The deliverable wasn't a palette. It was a full permutation set: a side-by-side component inventory showing developers exactly how each component renders in each mode, with legacy naming included to ease migration from the old system. Zero ambiguity at implementation time.</p>
 
-    <div class="img-placeholder">spire-color-tokens-darkmode.png</div>
+    <div class="img-full"><img src="spire-color-tokens-darkmode.png" alt="Color token mapping table showing all Spire tokens with light and dark resolved values" /></div>
     <p class="img-caption"><strong>Color mapping permutations.</strong> Each token showing resolved values across any mode, light, and dark. Right panel: light/dark component inventory side by side with legacy naming for migration.</p>
 
     <div class="note-block">
@@ -529,22 +545,22 @@ footer{
 
     <div class="img-pair">
       <div class="img-pair-item">
-        <div class="img-pair-placeholder">spire-figma-template-dothis1st.png</div>
+        <img src="spire-figma-template-dothis1st.png" alt="Do This 1st page showing file setup and naming instructions" />
         <p class="img-pair-caption"><strong>Do This 1st.</strong> File setup and naming convention before any design work begins.</p>
       </div>
       <div class="img-pair-item">
-        <div class="img-pair-placeholder">spire-figma-template-pagestructure.png</div>
+        <img src="spire-figma-template-pagestructure.png" alt="Page structure showing file evolution and archive convention" />
         <p class="img-pair-caption"><strong>Page structure.</strong> File evolution and archive convention, tied to Jira story status.</p>
       </div>
     </div>
 
     <div class="img-pair">
       <div class="img-pair-item">
-        <div class="img-pair-placeholder">spire-figma-readme-principles.png</div>
+        <img src="spire-figma-readme-principles.png" alt="Read Me page showing design principles, font stack, and color references" />
         <p class="img-pair-caption"><strong>Read Me.</strong> Design principles, font stack, and color references for both platforms.</p>
       </div>
       <div class="img-pair-item">
-        <div class="img-pair-placeholder">spire-figma-readme-spacing.png</div>
+        <img src="spire-figma-readme-spacing.png" alt="Read Me spacing section showing spacing system and color token index" />
         <p class="img-pair-caption"><strong>Read Me: spacing.</strong> Spacing system and color token index for iOS and Android.</p>
       </div>
     </div>
@@ -565,7 +581,7 @@ footer{
 
     <p>Images and SVGs were rendering with shifted colors on device, no obvious cause. The color profile in Xcode hadn't been set to sRGB. iOS renders in the sRGB color space by default. When the profile is set to something wider, Display P3 or Adobe RGB, colors that look correct in the design file shift on the actual screen. That's not visible in a Figma file or a static screenshot. It's only visible inside the build.</p>
 
-    <div class="img-placeholder">spire-xcode-srgb-colorprofile.png</div>
+    <div class="img-full"><img src="spire-xcode-srgb-colorprofile.png" alt="Xcode color profile set to sRGB fixing SVG and image color rendering issues on iOS" /></div>
     <p class="img-caption"><strong>Xcode color profile set to sRGB.</strong> The fix for SVG and image color rendering issues on iOS device. Not diagnosable without running the build.</p>
 
     <h3>SVG adoption on iOS</h3>
