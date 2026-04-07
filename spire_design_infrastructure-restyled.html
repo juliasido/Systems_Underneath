@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light only">
+<title>Spire Design Infrastructure — Fidelity Spire — Julia Barbosa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Lora:ital,wght@0,400;0,600;1,400&family=Libre+Baskerville:ital,wght@0,400;1,400&family=DM+Sans:ital,opsz,wght@0,9,300;0,9,400;0,9,500;0,9,600;1,9,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --ivory:#F7F5F0;
+  --teal:#1F9995;
+  --teal-light:#e8f5f5;
+  --teal-mid:#c2e8e7;
+  --teal-dark:#0f6e56;
+  --charcoal:#1C1917;
+  --charcoal-mid:#3d3936;
+  --charcoal-lt:#4A4540;
+  --mid-gray:#6b6461;
+  --rule:#d8d4ce;
+  --white:#ffffff;
+  --warm:#f2ece4;
+}
+
+html,body{
+  color-scheme:light !important;
+  background:#F7F5F0 !important;
+  color:#3d3936 !important;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Libre Baskerville',serif;
+  background:var(--ivory);
+  color:var(--charcoal-mid);
+  font-size:15px;
+  line-height:1.75;
+}
+
+/* ── LAYOUT ── */
+.page-wrap{max-width:760px;margin:0 auto;padding:0 32px}
+
+/* ── PAGE HEADER ── */
+.page-header{
+  padding:64px 32px 48px;
+  border-bottom:1px solid var(--rule);
+  max-width:760px;
+  margin:0 auto;
+}
+.breadcrumb{
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--mid-gray);
+  margin-bottom:20px;
+}
+.breadcrumb a{color:var(--teal);text-decoration:none}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb span{margin:0 8px;color:var(--rule)}
+h1{
+  font-family:'DM Serif Display',serif;
+  font-size:clamp(28px,4vw,42px);
+  font-weight:400;
+  line-height:1.15;
+  color:var(--charcoal);
+  margin-bottom:20px;
+  max-width:640px;
+}
+.lede{
+  font-family:'Lora',serif;
+  font-style:italic;
+  font-size:18px;
+  font-weight:400;
+  line-height:1.65;
+  color:var(--charcoal-mid);
+  max-width:600px;
+  margin-bottom:36px;
+}
+.role-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:32px;
+  row-gap:20px;
+  padding-top:24px;
+  padding-bottom:24px;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+.role-item{display:flex;flex-direction:column;gap:4px}
+.role-label{
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--mid-gray);
+  display:block;
+}
+.role-val{
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  color:var(--charcoal-mid);
+  font-weight:400;
+}
+
+/* ── ANCHOR PILLS ── */
+.anchor-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  padding:20px 0 0;
+}
+.anchor-nav a{
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  font-weight:500;
+  letter-spacing:.06em;
+  color:var(--teal);
+  text-decoration:none;
+  border:1px solid var(--teal-mid);
+  border-radius:4px;
+  padding:6px 14px;
+  background:transparent;
+  transition:background 0.15s ease,border-color 0.15s ease;
+}
+.anchor-nav a:hover{
+  background:var(--teal-light);
+  border-color:var(--teal);
+}
+
+/* ── SECTION HEADINGS ── */
+h2{
+  font-family:'Lora',serif;
+  font-size:clamp(20px,2.8vw,26px);
+  font-weight:600;
+  line-height:1.2;
+  color:var(--charcoal);
+  margin-bottom:20px;
+}
+h3{
+  font-family:'Lora',serif;
+  font-size:17px;
+  font-weight:400;
+  font-style:italic;
+  line-height:1.35;
+  color:var(--charcoal);
+  margin:28px 0 10px;
+}
+
+/* ── BODY ── */
+p{
+  font-family:'Libre Baskerville',serif;
+  font-size:15px;
+  line-height:1.75;
+  color:var(--charcoal-mid);
+  margin-bottom:18px;
+}
+p:last-child{margin-bottom:0}
+strong{color:var(--charcoal);font-weight:600}
+
+/* ── SECTION WRAPPER ── */
+.cs-section{
+  padding:56px 0 48px;
+  border-bottom:1px solid var(--rule);
+  scroll-margin-top:32px;
+}
+.cs-section:last-of-type{border-bottom:none}
+
+/* ── SECTION NUMBER + LABEL ── */
+.cs-section-number{
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--mid-gray);
+  margin-bottom:6px;
+}
+
+/* ── NOTE BLOCK ── */
+.note-block{
+  background:var(--teal-light);
+  border:1px solid var(--teal-mid);
+  border-radius:6px;
+  padding:20px 24px;
+  margin:28px 0;
+}
+.note-label{
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin-bottom:10px;
+}
+.note-block p{
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  line-height:1.65;
+  color:var(--charcoal-mid);
+  margin-bottom:10px;
+}
+.note-block p:last-child{margin-bottom:0}
+
+/* ── PULLQUOTE ── */
+.pullquote{
+  border-left:3px solid var(--teal);
+  padding:14px 20px;
+  margin:28px 0;
+}
+.pullquote p{
+  font-family:'Lora',serif;
+  font-style:italic;
+  font-size:17px;
+  line-height:1.6;
+  color:var(--charcoal);
+  margin-bottom:0;
+}
+
+/* ── PRINCIPLES BLOCK ── */
+.principles{
+  border:1px solid var(--rule);
+  border-radius:6px;
+  overflow:hidden;
+  margin:28px 0;
+  background:var(--white);
+}
+.principle-row{
+  padding:20px 24px;
+  border-bottom:1px solid var(--rule);
+}
+.principle-row:last-child{border-bottom:none}
+.principle-title{
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  color:var(--charcoal);
+  margin-bottom:6px;
+}
+.principle-body{
+  font-family:'Libre Baskerville',serif;
+  font-size:14px;
+  line-height:1.65;
+  color:var(--charcoal-mid);
+  margin:0;
+}
+
+/* ── IMAGE PLACEHOLDER ── */
+.img-placeholder{
+  font-family:'DM Sans',sans-serif;
+  background:#f0ede8;
+  border:1px solid var(--rule);
+  border-radius:6px;
+  height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:24px 0 8px;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--mid-gray);
+  text-align:center;
+  padding:0 24px;
+}
+.img-caption{
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  color:var(--mid-gray);
+  line-height:1.5;
+  margin-bottom:24px;
+}
+.img-caption strong{
+  color:var(--charcoal-mid);
+  font-weight:600;
+}
+
+/* ── TWO-UP IMAGE PAIR ── */
+.img-pair{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin:24px 0 8px;
+}
+.img-pair-item{}
+.img-pair-placeholder{
+  font-family:'DM Sans',sans-serif;
+  background:#f0ede8;
+  border:1px solid var(--rule);
+  border-radius:6px;
+  height:200px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--mid-gray);
+  text-align:center;
+  padding:0 16px;
+  margin-bottom:8px;
+}
+.img-pair-caption{
+  font-family:'DM Sans',sans-serif;
+  font-size:12px;
+  color:var(--mid-gray);
+  line-height:1.5;
+}
+.img-pair-caption strong{
+  color:var(--charcoal-mid);
+  font-weight:600;
+}
+
+/* ── LINKED CASE STUDY CARD ── */
+.linked-card{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding:20px 24px;
+  border:1px solid var(--rule);
+  border-radius:6px;
+  margin:28px 0;
+  text-decoration:none;
+  background:var(--white);
+  transition:border-color 0.15s ease,background 0.15s ease;
+}
+.linked-card:hover{
+  border-color:var(--teal);
+  background:var(--teal-light);
+}
+.linked-card-tag{
+  font-family:'DM Sans',sans-serif;
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--teal);
+  background:var(--teal-light);
+  border:1px solid var(--teal-mid);
+  border-radius:4px;
+  padding:4px 10px;
+  white-space:nowrap;
+  flex-shrink:0;
+  margin-top:2px;
+}
+.linked-card-content{}
+.linked-card-title{
+  font-family:'DM Sans',sans-serif;
+  font-size:14px;
+  font-weight:600;
+  color:var(--charcoal);
+  margin-bottom:4px;
+}
+.linked-card-desc{
+  font-family:'DM Sans',sans-serif;
+  font-size:13px;
+  color:var(--mid-gray);
+  line-height:1.55;
+}
+
+/* ── CLOSING ── */
+.cs-closing{
+  padding:56px 0 64px;
+}
+.cs-closing-text{
+  font-family:'Lora',serif;
+  font-style:italic;
+  font-size:clamp(18px,2.5vw,22px);
+  font-weight:400;
+  line-height:1.5;
+  color:var(--charcoal);
+  max-width:560px;
+}
+
+/* ── FOOTER ── */
+footer{
+  font-family:'DM Sans',sans-serif;
+  text-align:center;
+  padding:36px;
+  background:var(--charcoal);
+  font-size:11px;
+  color:#a89880;
+  letter-spacing:.1em;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:680px){
+  .page-header,.page-wrap{padding-left:20px;padding-right:20px}
+  .img-pair{grid-template-columns:1fr}
+  .role-row{gap:20px}
+}
+
+/* ── DARK MODE DEFENSE ── */
+@media(prefers-color-scheme:dark){
+  html,body{background:#F7F5F0 !important;color:#3d3936 !important}
+  .principles,.principle-row,.linked-card{background:#F7F5F0 !important}
+  .note-block{background:#e8f5f5 !important}
+  h1,h2,h3{color:#1C1917 !important}
+  p,li,span{color:#3d3936 !important}
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="breadcrumb">
+    <a href="#">Fidelity Spire</a><span>/</span>Design Infrastructure
+  </div>
+  <h1>The systems underneath the product</h1>
+  <p class="lede">Component library, dark mode token system, Figma project template, and build access: the infrastructure work at Spire that no one assigned and that outlasted the product itself.</p>
+  <div class="role-row">
+    <div class="role-item"><span class="role-label">Role</span><span class="role-val">Principal Designer</span></div>
+    <div class="role-item"><span class="role-label">Platform</span><span class="role-val">iOS &amp; Android</span></div>
+    <div class="role-item"><span class="role-label">Scope</span><span class="role-val">6 developer squads</span></div>
+    <div class="role-item"><span class="role-label">Years</span><span class="role-val">2018–2022</span></div>
+  </div>
+  <nav class="anchor-nav">
+    <a href="#component-library">Component library</a>
+    <a href="#dark-mode">Dark mode</a>
+    <a href="#figma-template">Figma template</a>
+    <a href="#build-access">Working in the build</a>
+    <a href="#ab-testing">A/B testing</a>
+  </nav>
+</header>
+
+<div class="page-wrap">
+
+  <!-- INTRO -->
+  <div class="cs-section" style="padding-top:48px;">
+    <p>Spire was a small team shipping a complex product across iOS and Android simultaneously. Most of what made that possible wasn't in a sprint. It was infrastructure: the component library that gave every designer a shared starting point, the dark mode token system built from zero, the Figma template that finally told developers what was finished and what wasn't. None of it was assigned. All of it was necessary.</p>
+  </div>
+
+  <!-- 01 COMPONENT LIBRARY -->
+  <div class="cs-section" id="component-library">
+    <div class="cs-section-number">01</div>
+    <h2>Component library</h2>
+
+    <p>Component library work wasn't new to me when I joined Spire. At Fidelity Institutional I had worked on the first responsive web refactoring of their advisor platform, built on reusable components and page-level patterns mapped directly to design files. Spire's job description didn't ask for a component library. The growing complexity of the product did. I started it without being asked.</p>
+
+    <p>The structure was bottom-up. Color styles, text styles, and effect styles formed the base layer in Figma. Everything above referenced those styles directly: type scales built on text styles, components built on color and effect styles, page patterns built on components. A change at the base cascaded through everything referencing it.</p>
+
+    <p>Components were built as component sets with variant properties covering every state: default, pressed, disabled, focused, error. Auto layout was applied throughout so components responded to content predictably. A button with a longer label expanded correctly. A list item adjusted to its content. What a designer composed in the library behaved consistently with what an engineer built from it.</p>
+
+    <h3>Platform-agnostic experience, platform-native components</h3>
+
+    <p>The library served both iOS and Android. The experience was platform-agnostic: the same flows, the same feature parity, the same content across both platforms. The components were platform-native: each platform got its own implementation following its own conventions. Material Design on Android. HIG on iOS. Tab bar on iOS, hamburger navigation on Android. No back chevron on Android because the OS handles navigation with a hardware button, so modals used X instead. Inputs, alerts, headers, and bottom sheets all followed their respective platform patterns. Every divergence was documented side by side so developers had an unambiguous reference.</p>
+
+    <p>The governing principle was to never create a component outside what Material Design and HIG already provided. Every platform component had its interaction model solved, its accessibility behavior defined, and its maintenance handled by the platform. A custom component meant owning its updates, its accessibility, and its code maintenance indefinitely on both platforms. The bar was high. It was almost never cleared. When it was, it was a simple UI element, not a new interaction pattern.</p>
+
+    <div class="img-pair">
+      <div class="img-pair-item">
+        <div class="img-pair-placeholder">spire-component-library-system.png</div>
+        <p class="img-pair-caption"><strong>Component library.</strong> Color system, component sets, and light/dark inventory.</p>
+      </div>
+      <div class="img-pair-item">
+        <div class="img-pair-placeholder">spire-figma-readme-components.png</div>
+        <p class="img-pair-caption"><strong>Platform-native equivalents.</strong> iOS vs Android documented side by side: navigation, inputs, bottom sheets.</p>
+      </div>
+    </div>
+
+    <div class="note-block">
+      <div class="note-label">Source of truth files</div>
+      <p>Two companion files supported the library. The master Spire pages file contained every screen in production, built on library components with correct spacing and current content. It was the design-side source of truth for the latest state of the product. When a squad shipped a new screen, I retrieved it from their working file, cleaned it to master standards, and brought it in.</p>
+      <p>That file fed into the master Spire flow file: a complete sitemap showing how every screen interconnected. Both files were sole-maintained. Together they gave the team a current picture of the product at any point.</p>
+    </div>
+
+    <p>I built and maintained the library alone for the full life of the product: publishing updates, managing changes, writing documentation, setting QA standards, and onboarding designers to usage rules. 135 components. 24 styles. Six developer squads.</p>
+  </div>
+
+  <!-- 02 DARK MODE -->
+  <div class="cs-section" id="dark-mode">
+    <div class="cs-section-number">02</div>
+    <h2>Dark mode from scratch</h2>
+
+    <p>Spire had no dark mode. That meant no token structure, no light/dark switching logic, and a color system where every value was a hardcoded single hex across both iOS and Android. Before a single dark mode color could be defined, the entire existing system had to be understood and restructured.</p>
+
+    <p>I audited the full color system on both platforms, created a named token structure, and worked with developers to establish how each token resolved in light and dark contexts. The naming convention used a Spire namespace throughout: <code style="font-family:'DM Sans',sans-serif;font-size:13px;background:var(--warm);padding:2px 6px;border-radius:3px;color:var(--charcoal-mid);">green_1_spr</code>, <code style="font-family:'DM Sans',sans-serif;font-size:13px;background:var(--warm);padding:2px 6px;border-radius:3px;color:var(--charcoal-mid);">red_spr</code>, with a <code style="font-family:'DM Sans',sans-serif;font-size:13px;background:var(--warm);padding:2px 6px;border-radius:3px;color:var(--charcoal-mid);">yl_common</code> prefix on Android. Before this work, the names in design files and the names in code were not the same. After it, color tokens were the one layer genuinely aligned between design and developer code across both platforms. Every pairing was verified against WCAG contrast requirements.</p>
+
+    <p>The deliverable wasn't a palette. It was a full permutation set: a side-by-side component inventory showing developers exactly how each component renders in each mode, with legacy naming included to ease migration from the old system. Zero ambiguity at implementation time.</p>
+
+    <div class="img-placeholder">spire-color-tokens-darkmode.png</div>
+    <p class="img-caption"><strong>Color mapping permutations.</strong> Each token showing resolved values across any mode, light, and dark. Right panel: light/dark component inventory side by side with legacy naming for migration.</p>
+
+    <div class="note-block">
+      <div class="note-label">Downstream impact</div>
+      <p>A director and developer at Fidelity noted in a LinkedIn recommendation that the dark mode system designed for Spire had been applied to all Spire apps. The contrast accessibility work produced during this project was adopted by the Fidelity flagship app.</p>
+    </div>
+  </div>
+
+  <!-- 03 FIGMA TEMPLATE -->
+  <div class="cs-section" id="figma-template">
+    <div class="cs-section-number">03</div>
+    <h2>Figma project template</h2>
+
+    <p>The trigger was a direct request from developers. When opening a designer's file, they couldn't tell what was finalized, in progress, or abandoned. Every file was structured differently. Status was invisible unless you found the right person and asked.</p>
+
+    <p>I built a standardized template every designer on the team could duplicate and work from. The page structure made file state immediately readable without asking. Visual status markers were tied to Jira stories. A commenting convention added clarity at each stage.</p>
+
+    <h3>What the template contained</h3>
+
+    <div class="principles">
+      <div class="principle-row">
+        <div class="principle-title">Do This 1st</div>
+        <p class="principle-body">File setup and naming convention. The first page every designer opened: how to duplicate the template, what to name the file, and how to enable the correct libraries before any work started.</p>
+      </div>
+      <div class="principle-row">
+        <div class="principle-title">Page structure</div>
+        <p class="principle-body">A defined convention for how work evolved and archived across the file. In-flight work had a clear home. Completed work had a clear archive. Nothing was ambiguous about what state any page was in.</p>
+      </div>
+      <div class="principle-row">
+        <div class="principle-title">Assets</div>
+        <p class="principle-body">Which libraries to enable, which utility assets were available for markup, and where everything lived. Designers spent no time hunting for components or asking which library was current.</p>
+      </div>
+      <div class="principle-row">
+        <div class="principle-title">Read Me</div>
+        <p class="principle-body">Design principles, spacing system, font stack, and color references for iOS and Android. Component differences between the two platforms documented side by side. For new designers, this page also served as orientation: what's in use, what's deprecated, and why the system works the way it does.</p>
+      </div>
+    </div>
+
+    <div class="img-pair">
+      <div class="img-pair-item">
+        <div class="img-pair-placeholder">spire-figma-template-dothis1st.png</div>
+        <p class="img-pair-caption"><strong>Do This 1st.</strong> File setup and naming convention before any design work begins.</p>
+      </div>
+      <div class="img-pair-item">
+        <div class="img-pair-placeholder">spire-figma-template-pagestructure.png</div>
+        <p class="img-pair-caption"><strong>Page structure.</strong> File evolution and archive convention, tied to Jira story status.</p>
+      </div>
+    </div>
+
+    <div class="img-pair">
+      <div class="img-pair-item">
+        <div class="img-pair-placeholder">spire-figma-readme-principles.png</div>
+        <p class="img-pair-caption"><strong>Read Me.</strong> Design principles, font stack, and color references for both platforms.</p>
+      </div>
+      <div class="img-pair-item">
+        <div class="img-pair-placeholder">spire-figma-readme-spacing.png</div>
+        <p class="img-pair-caption"><strong>Read Me: spacing.</strong> Spacing system and color token index for iOS and Android.</p>
+      </div>
+    </div>
+
+    <p>I ran feedback sessions with the team while building the template. By the time it was ready, it already reflected how people worked. Adoption was full. No convincing required.</p>
+  </div>
+
+  <!-- 04 WORKING IN THE BUILD -->
+  <div class="cs-section" id="build-access">
+    <div class="cs-section-number">04</div>
+    <h2>Working in the build</h2>
+
+    <p>I had full access to Xcode and Android Studio. That meant seeing the latest implementation in the running build directly, not from a screenshot or a verbal description of a problem.</p>
+
+    <p>When the dark mode token system was pushed, I validated the colors in the build and re-validated after every subsequent push. When a shadow needed specific behavior on iOS, I provided the implementation in code rather than a static annotation. When SVG rendering produced unexpected output, I uploaded files into the environment to diagnose the issue directly.</p>
+
+    <h3>A specific example</h3>
+
+    <p>Images and SVGs were rendering with shifted colors on device, no obvious cause. The color profile in Xcode hadn't been set to sRGB. iOS renders in the sRGB color space by default. When the profile is set to something wider, Display P3 or Adobe RGB, colors that look correct in the design file shift on the actual screen. That's not visible in a Figma file or a static screenshot. It's only visible inside the build.</p>
+
+    <div class="img-placeholder">spire-xcode-srgb-colorprofile.png</div>
+    <p class="img-caption"><strong>Xcode color profile set to sRGB.</strong> The fix for SVG and image color rendering issues on iOS device. Not diagnosable without running the build.</p>
+
+    <h3>SVG adoption on iOS</h3>
+
+    <p>Before iOS supported SVGs, every icon and asset required export at three sizes per feature, per release. Consistent overhead every cycle for both designers and developers. When iOS added SVG support, I made the case across squads, scoped the migration, and built alignment. The three-size export process was eliminated.</p>
+
+    <div class="pullquote">
+      <p>The gap between a spec and what ships is where quality is lost. Closing it sometimes means working inside the build.</p>
+    </div>
+  </div>
+
+  <!-- 05 A/B TESTING -->
+  <div class="cs-section" id="ab-testing">
+    <div class="cs-section-number">05</div>
+    <h2>Native A/B testing: a first for Fidelity</h2>
+
+    <p>Fidelity had run web A/B tests through Adobe Target since 2010. Native apps were a gap. No hook existed, no team had solved it, and no one had tried.</p>
+
+    <p>I identified the Digital Marketing Technology team as the missing piece, made the case to the squad lead, and brought them in to build a custom bridge between native app behavior and Adobe Target. The first test launched in January 2022 and produced a 61% lift in account open conversion at 99.9% statistical confidence.</p>
+
+    <p>The infrastructure didn't stay inside Spire. Fidelity now has a dedicated pool of developers and standard guidelines for running native app experiments across all its mobile products. What started as a solution for a single Spire test is now how Fidelity validates product decisions in native apps.</p>
+
+    <a class="linked-card" href="spire_ab_test_case_study.html">
+      <span class="linked-card-tag">Case study</span>
+      <div class="linked-card-content">
+        <div class="linked-card-title">Spire Onboarding A/B Test</div>
+        <p class="linked-card-desc">The hypothesis, experiment design, +61% lift result, and the infrastructure it left behind.</p>
+      </div>
+    </a>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="cs-closing">
+    <p class="cs-closing-text">Spire was sunset in 2022. The component library, the dark mode system, the Figma template, the experimentation infrastructure: none of it required continued involvement to keep working. That's the version of design impact worth building toward.</p>
+  </div>
+
+</div><!-- /page-wrap -->
+
+<footer>
+  &copy; 2026 Julia Barbosa. All Rights Reserved.
+</footer>
+
+</body>
+</html>
