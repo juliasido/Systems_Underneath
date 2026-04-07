@@ -408,9 +408,25 @@ footer{
   letter-spacing:.1em;
 }
 
+/* ── HERO IMAGE ── */
+.hero-image-wrap{
+  max-width:740px;
+  margin:0 auto;
+  padding:32px 40px 0;
+}
+.hero-image{
+  width:100%;
+  display:block;
+  border-radius:8px;
+  border:1px solid var(--rule);
+  aspect-ratio:900/370;
+  object-fit:cover;
+}
+
 /* ── RESPONSIVE ── */
 @media(max-width:680px){
   .page-header,.page-wrap{padding-left:20px;padding-right:20px}
+  .hero-image-wrap{padding-left:20px;padding-right:20px}
   .img-pair{grid-template-columns:1fr}
   .role-row{gap:20px}
 }
@@ -448,6 +464,11 @@ footer{
     <a href="#ab-testing">A/B testing</a>
   </nav>
 </header>
+
+<!-- HERO IMAGE -->
+<div class="hero-image-wrap">
+  <img src="spire-systems-hero.png" alt="Spire design infrastructure overview" class="hero-image" />
+</div>
 
 <div class="page-wrap">
 
